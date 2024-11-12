@@ -131,6 +131,40 @@
     });
 </script>
 
+<!-- Add this to your +layout.svelte or +page.svelte -->
+<svelte:head>
+    <title>Joel Chhetri - Full Stack Developer</title>
+    <meta name="description" content="Joel Chhetri's portfolio showcasing skills in full stack development, projects, and services offered." />
+    <meta name="keywords" content="Joel Chhetri, Full Stack Developer, Web Development, Portfolio, Projects" />
+    <meta name="author" content="Joel Chhetri" />
+    <meta property="og:title" content="Joel Chhetri - Full Stack Developer" />
+    <meta property="og:description" content="Explore Joel Chhetri's portfolio to see his skills, projects, and services offered." />
+    <meta property="og:image" content="/path/to/your/image.jpg" />
+    <meta property="og:url" content="https://yourwebsite.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Joel Chhetri - Full Stack Developer" />
+    <meta name="twitter:description" content="Explore Joel Chhetri's portfolio to see his skills, projects, and services offered." />
+    <meta name="twitter:image" content="/path/to/your/image.jpg" />
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Joel Chhetri",
+            "url": "https://yourwebsite.com",
+            "sameAs": [
+                "https://github.com/Cptbanana3000",
+                "mailto:joelchhetriwork@gmail.com"
+            ],
+            "jobTitle": "Full Stack Developer",
+            "worksFor": {
+                "@type": "Organization",
+                "name": "Joel Chhetri"
+            }
+        }
+    </script>
+</svelte:head>
+
 <!-- Hero Section -->
 <section class="hero min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 to-gray-900 text-white p-8 md:p-12">
     {#if visible}
@@ -311,6 +345,7 @@
                         src="/personal.png" 
                         alt="Portfolio Preview" 
                         class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-300"
+                        loading="lazy"
                     />
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50"></div>
                 </div>
@@ -339,6 +374,7 @@
                         src="/weather1.webp" 
                         alt="Weather App Preview" 
                         class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-300"
+                        loading="lazy"
                     />
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50"></div>
                 </div>
