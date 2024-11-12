@@ -1,4 +1,5 @@
 <script>
+    import { PUBLIC_FORMSPREE_ENDPOINT } from '$env/static/public';
     import { onMount } from 'svelte';
     import { fade, fly, slide } from 'svelte/transition';
     import TimedText from '$lib/components/TimedText.svelte';
@@ -662,7 +663,7 @@
     {/if}
 
     <form 
-        action="https://formspree.io/f/movqwlvy"
+        action={PUBLIC_FORMSPREE_ENDPOINT}
         method="POST"
         class="space-y-6 max-w-2xl mx-auto"
         onsubmit={handleSubmit}
