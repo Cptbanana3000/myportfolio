@@ -4,6 +4,7 @@
 	
 	let { children } = $props();
 	let isScrolled = $state(false);
+	let isMobileMenuOpen = $state(false);
 	
 	onMount(() => {
 		const handleScroll = () => {
@@ -37,7 +38,7 @@
 
 			<!-- Navigation -->
 			<nav class="hidden md:flex space-x-8 text-sm font-light tracking-wide">
-				{#each ['About', 'Skills', 'Projects', 'Contact'] as item}
+				{#each ['About', 'Skills', 'Services', 'Projects', 'Contact'] as item}
 					<a 
 						href="#{item.toLowerCase()}" 
 						class="relative group text-white/80 hover:text-white transition-colors duration-300"
@@ -52,11 +53,29 @@
 			<button 
 				class="md:hidden text-white" 
 				aria-label="Toggle mobile menu"
+				onclick={() => isMobileMenuOpen = !isMobileMenuOpen}
 			>
-				<i class="fas fa-bars"></i>
+				<i class="fas {isMobileMenuOpen ? 'fa-times' : 'fa-bars'}"></i>
 			</button>
 		</div>
 	</div>
+
+	<!-- Add this after the header div -->
+	{#if isMobileMenuOpen}
+		<div class="md:hidden fixed inset-x-0 top-[73px] bg-gray-950/95 backdrop-blur-sm">
+			<nav class="flex flex-col items-center py-8">
+				{#each ['About', 'Skills', 'Services', 'Projects', 'Contact'] as item}
+					<a 
+						href="#{item.toLowerCase()}" 
+						class="py-4 text-white/80 hover:text-white transition-colors duration-300"
+						onclick={() => isMobileMenuOpen = false}
+					>
+						{item}
+					</a>
+				{/each}
+			</nav>
+		</div>
+	{/if}
 </header>
 
 <!-- Main Content -->
@@ -80,7 +99,7 @@
 					<i class="fab fa-github text-2xl"></i>
 				</a>
 				<a 
-					href="mailto:joelchhetri2001@gmail.com" 
+					href="mailto:joelchhetriwork@gmail.com" 
 					class="group relative p-2"
 					aria-label="Email Me"
 				>
@@ -94,7 +113,7 @@
 			<!-- Copyright -->
 			<div class="text-center text-sm text-white/60">
 				<p>&copy; {new Date().getFullYear()} Joel Chhetri. All rights reserved.</p>
-				<p class="mt-2 text-xs">Crafted with ❤️ in Nepal</p>
+				<p class="mt-2 text-xs">Hit me UP!!!!</p>
 			</div>
 		</div>
 	</div>
