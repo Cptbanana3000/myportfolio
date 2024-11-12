@@ -140,8 +140,6 @@
     <meta name="author" content="Joel Chhetri" />
     <meta property="og:title" content="Joel Chhetri - Full Stack Developer" />
     <meta property="og:description" content="Explore Joel Chhetri's portfolio to see his skills, projects, and services offered." />
-    <meta property="og:image" content="/path/to/your/image.jpg" />
-    <meta property="og:url" content="https://yourwebsite.com" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Joel Chhetri - Full Stack Developer" />
     <meta name="twitter:description" content="Explore Joel Chhetri's portfolio to see his skills, projects, and services offered." />
