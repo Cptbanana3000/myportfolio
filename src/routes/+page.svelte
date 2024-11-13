@@ -85,7 +85,6 @@
     async function handleSubmit(event) {
         event.preventDefault();
         
-        // Check rate limit
         if (!checkRateLimit()) {
             showError = true;
             return;
@@ -94,36 +93,37 @@
         isSubmitting = true;
 
         try {
-            // Get reCAPTCHA v3 token
+            const form = event.target;
+            
+            // Get form values directly
+            const formValues = {
+                name: form.name.value,
+                email: form.email.value,
+                subject: form.subject.value,
+                message: form.message.value
+            };
+
+            // Debug log
+            console.log('Form Values:', formValues);
+
+            // Get reCAPTCHA token
             const token = await grecaptcha.execute(PUBLIC_RECAPTCHA_SITE_KEY, {
                 action: 'submit_contact'
             });
 
-            const form = event.target;
-            const formData = new FormData(form);
-            
-            // Debug log
-            console.log('Form Data before submission:');
-            for (let [key, value] of formData.entries()) {
-                console.log(`${key}: ${value}`);
-            }
-
-            // Check honeypot
-            if (formData.get('_gotcha')) {
-                console.log('Bot detected');
-                return;
-            }
-
-            // Add token to form data
-            formData.append('g-recaptcha-response', token);
+            // Create the final payload
+            const payload = {
+                ...formValues,
+                'g-recaptcha-response': token
+            };
 
             const response = await fetch(PUBLIC_FORMSPREE_ENDPOINT, {
                 method: 'POST',
-                body: formData,  // Send as FormData, not JSON
                 headers: {
-                    'Accept': 'application/json'
-                    // Remove Content-Type header to let browser set it with boundary for FormData
-                }
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             });
 
             if (response.ok) {
@@ -131,8 +131,8 @@
                 form.reset();
                 showSuccess = true;
             } else {
-                const errorText = await response.text();
-                console.error('Form submission failed:', errorText);
+                const errorData = await response.text();
+                console.error('Form submission failed:', errorData);
                 showError = true;
             }
         } catch (error) {
@@ -749,21 +749,18 @@
             ></textarea>
         </div>
 
-        <!-- Submit Button -->
-        <div class="text-center">
-            <button
-                type="submit"
-                class="inline-flex items-center px-8 py-3 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={isSubmitting}
-            >
-                {#if isSubmitting}
-                    <i class="fas fa-spinner fa-spin mr-2"></i>
-                    Sending...
-                {:else}
-                    <i class="fas fa-paper-plane mr-2"></i>
-                    Send Message
-                {/if}
-            </button>
-        </div>
+        <button
+            type="submit"
+            class="inline-flex items-center px-8 py-3 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
+        >
+            {#if isSubmitting}
+                <i class="fas fa-spinner fa-spin mr-2"></i>
+                Sending...
+            {:else}
+                <i class="fas fa-paper-plane mr-2"></i>
+                Send Message
+            {/if}
+        </button>
     </form>
 </div>
