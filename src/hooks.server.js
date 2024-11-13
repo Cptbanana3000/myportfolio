@@ -20,15 +20,15 @@ export const handle = async ({ event, resolve }) => {
             "img-src 'self' data: https:",
             // Allow fonts from Font Awesome and Google Fonts
             "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
-            // Allow connections to Formspree
-            "connect-src 'self' https://formspree.io",
+            // Allow connections to Formspree and Google reCAPTCHA
+            "connect-src 'self' https://formspree.io https://www.google.com",
             // Allow frames for reCAPTCHA
             "frame-src 'self' https://www.google.com",
             "frame-ancestors 'none'",
             // Allow form submissions to Formspree
             "form-action 'self' https://formspree.io",
             "base-uri 'self'",
-             "style-src-elem 'self' 'unsafe-inline' https://cdnjs.cloudflare.com"
+            "style-src-elem 'self' 'unsafe-inline' https://cdnjs.cloudflare.com"
         ].join('; ')
     );
     

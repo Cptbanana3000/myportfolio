@@ -13,7 +13,7 @@
     let showSuccess = $state(false);
     let showError = $state(false);
     
-    onMount(() => {
+    onMount(() => { 
         visible = true;
         
         // Intersection Observer for About section
@@ -85,6 +85,13 @@
     async function handleSubmit(event) {
         event.preventDefault();
         
+        // Debug log to see if form data is being captured
+        const formData = new FormData(event.target);
+        console.log('Form Data:');
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+        
         // Check rate limit
         if (!checkRateLimit()) {
             showError = true;
@@ -99,30 +106,32 @@
                 action: 'submit_contact'
             });
 
-            const form = event.target;
-            const formData = new FormData(form);
-            
+            // Add token to form data
+            formData.append('g-recaptcha-response', token);
+
             // Check honeypot
             if (formData.get('_gotcha')) {
                 console.log('Bot detected');
                 return;
             }
 
-            // Add token to form data
-            formData.append('g-recaptcha-response', token);
-
-            const response = await fetch(form.action, {
-                method: form.method,
+            const response = await fetch(PUBLIC_FORMSPREE_ENDPOINT, {
+                method: 'POST',
                 body: formData,
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 }
             });
 
             if (response.ok) {
-                form.reset();
+                const result = await response.json();
+                console.log('Form submission successful:', result);
+                event.target.reset();
                 showSuccess = true;
             } else {
+                const errorText = await response.text();
+                console.error('Form submission failed:', errorText);
                 showError = true;
             }
         } catch (error) {
@@ -670,21 +679,11 @@
     {/if}
 
     <form 
-        action={PUBLIC_FORMSPREE_ENDPOINT}
         method="POST"
+        action={PUBLIC_FORMSPREE_ENDPOINT}
         class="space-y-6 max-w-2xl mx-auto"
         onsubmit={handleSubmit}
     >
-        <!-- Honeypot field -->
-        <div class="hidden">
-            <input
-                type="text"
-                name="_gotcha"
-                tabindex="-1"
-                autocomplete="off"
-            />
-        </div>
-
         <!-- Name Input -->
         <div>
             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
