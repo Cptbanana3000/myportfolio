@@ -1,5 +1,5 @@
 <script>
-    import { PUBLIC_FORMSPREE_ENDPOINT } from '$env/static/public';
+    import { PUBLIC_FORMSPREE_ENDPOINT, PUBLIC_RECAPTCHA_SITE_KEY } from '$env/static/public';
     import { onMount } from 'svelte';
     import { fade, fly, slide } from 'svelte/transition';
     import TimedText from '$lib/components/TimedText.svelte';
@@ -91,6 +91,13 @@
             return;
         }
 
+        // Get reCAPTCHA response
+        const captchaResponse = grecaptcha.getResponse();
+        if (!captchaResponse) {
+            showError = true;
+            return;
+        }
+
         isSubmitting = true;
 
         try {
@@ -103,6 +110,9 @@
                 return;
             }
 
+            // Add captcha response to form data
+            formData.append('g-recaptcha-response', captchaResponse);
+
             const response = await fetch(form.action, {
                 method: form.method,
                 body: formData,
@@ -113,6 +123,7 @@
 
             if (response.ok) {
                 form.reset();
+                grecaptcha.reset();
                 showSuccess = true;
             } else {
                 showError = true;
@@ -654,7 +665,7 @@
 
     {#if showError}
         <TimedText 
-            message="Please wait a moment before sending another message."
+            message="Please complete the reCAPTCHA verification."
             type="error"
             on:hide={() => showError = false}
         />
@@ -738,6 +749,14 @@
                 placeholder="Your message here..."
                 disabled={isSubmitting}
             ></textarea>
+        </div>
+
+        <!-- Add reCAPTCHA before the submit button -->
+        <div class="flex justify-center">
+            <div 
+                class="g-recaptcha" 
+                data-sitekey={PUBLIC_RECAPTCHA_SITE_KEY}
+            ></div>
         </div>
 
         <!-- Submit Button -->
