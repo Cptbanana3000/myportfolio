@@ -85,13 +85,6 @@
     async function handleSubmit(event) {
         event.preventDefault();
         
-        // Debug log to see if form data is being captured
-        const formData = new FormData(event.target);
-        console.log('Form Data:');
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
-        }
-        
         // Check rate limit
         if (!checkRateLimit()) {
             showError = true;
@@ -106,8 +99,14 @@
                 action: 'submit_contact'
             });
 
-            // Add token to form data
-            formData.append('g-recaptcha-response', token);
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Debug log
+            console.log('Form Data before submission:');
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
 
             // Check honeypot
             if (formData.get('_gotcha')) {
@@ -115,19 +114,21 @@
                 return;
             }
 
+            // Add token to form data
+            formData.append('g-recaptcha-response', token);
+
             const response = await fetch(PUBLIC_FORMSPREE_ENDPOINT, {
                 method: 'POST',
-                body: formData,
+                body: formData,  // Send as FormData, not JSON
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Accept': 'application/json'
+                    // Remove Content-Type header to let browser set it with boundary for FormData
                 }
             });
 
             if (response.ok) {
-                const result = await response.json();
-                console.log('Form submission successful:', result);
-                event.target.reset();
+                console.log('Form submission successful');
+                form.reset();
                 showSuccess = true;
             } else {
                 const errorText = await response.text();
@@ -672,7 +673,7 @@
 
     {#if showError}
         <TimedText 
-            message="Please complete the reCAPTCHA verification."
+            message="Sorry, something went wrong. Please try again."
             type="error"
             on:hide={() => showError = false}
         />
