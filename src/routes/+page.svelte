@@ -91,16 +91,14 @@
             return;
         }
 
-        // Get reCAPTCHA response
-        const captchaResponse = grecaptcha.getResponse();
-        if (!captchaResponse) {
-            showError = true;
-            return;
-        }
-
         isSubmitting = true;
 
         try {
+            // Get reCAPTCHA v3 token
+            const token = await grecaptcha.execute(PUBLIC_RECAPTCHA_SITE_KEY, {
+                action: 'submit_contact'
+            });
+
             const form = event.target;
             const formData = new FormData(form);
             
@@ -110,8 +108,8 @@
                 return;
             }
 
-            // Add captcha response to form data
-            formData.append('g-recaptcha-response', captchaResponse);
+            // Add token to form data
+            formData.append('g-recaptcha-response', token);
 
             const response = await fetch(form.action, {
                 method: form.method,
@@ -123,22 +121,22 @@
 
             if (response.ok) {
                 form.reset();
-                grecaptcha.reset();
                 showSuccess = true;
             } else {
                 showError = true;
             }
         } catch (error) {
+            console.error('Form submission error:', error);
             showError = true;
         } finally {
             isSubmitting = false;
         }
     }
 
-    // Add reCAPTCHA script to head
+    // Load reCAPTCHA v3
     onMount(() => {
         const script = document.createElement('script');
-        script.src = 'https://www.google.com/recaptcha/api.js';
+        script.src = `https://www.google.com/recaptcha/api.js?render=${PUBLIC_RECAPTCHA_SITE_KEY}`;
         document.head.appendChild(script);
     });
 </script>
@@ -749,14 +747,6 @@
                 placeholder="Your message here..."
                 disabled={isSubmitting}
             ></textarea>
-        </div>
-
-        <!-- Add reCAPTCHA before the submit button -->
-        <div class="flex justify-center">
-            <div 
-                class="g-recaptcha" 
-                data-sitekey={PUBLIC_RECAPTCHA_SITE_KEY}
-            ></div>
         </div>
 
         <!-- Submit Button -->
