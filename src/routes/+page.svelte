@@ -150,7 +150,7 @@
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Joel Chhetri",
-            "url": "https://yourwebsite.com",
+            "url": "https://joelchhetri.tech",
             "sameAs": [
                 "https://github.com/Cptbanana3000",
                 "mailto:joelchhetriwork@gmail.com"
@@ -176,7 +176,7 @@
                     </span>
                 </h1>
                 <h2 class="text-2xl md:text-3xl text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
-                    Crafting digital experiences with clean code and minimalist design
+                    Code. Create. Elevate.
                 </h2>
             </div>
 
@@ -275,7 +275,7 @@
                         <h3 class="text-xl font-semibold text-gray-900">Frontend</h3>
                     </div>
                     <div class="space-y-3">
-                        {#each ['React', 'Svelte/SvelteKit', 'JavaScript', 'Tailwind CSS'] as skill, i}
+                        {#each ['React', 'Svelte/SvelteKit', 'JavaScript', 'Tailwind CSS', 'Bootstrap'] as skill, i}
                             <div 
                                 in:fly="{{ y: 20, duration: 800, delay: 300 + (i * 100) }}"
                                 class="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
@@ -296,7 +296,7 @@
                         <h3 class="text-xl font-semibold text-gray-900">Backend</h3>
                     </div>
                     <div class="space-y-3">
-                        {#each ['Node.js', 'Express', 'MongoDB', 'REST APIs'] as skill, i}
+                        {#each ['Node.js', 'Express', 'MongoDB', 'REST APIs', 'Bun'] as skill, i}
                             <div 
                                 in:fly="{{ y: 20, duration: 800, delay: 500 + (i * 100) }}"
                                 class="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
@@ -317,7 +317,7 @@
                         <h3 class="text-xl font-semibold text-gray-900">Tools & Deployment</h3>
                     </div>
                     <div class="space-y-3">
-                        {#each ['Git', 'Vercel', 'Netlify', 'AWS'] as skill, i}
+                        {#each ['Git', 'Vercel', 'Netlify', 'AWS', 'Render'] as skill, i}
                             <div 
                                 in:fly="{{ y: 20, duration: 800, delay: 700 + (i * 100) }}"
                                 class="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
