@@ -353,14 +353,17 @@
 
 <!-- Projects Section -->
 <section id="projects" class="py-32 bg-white">
+
     <div class="container mx-auto px-8">
         <h2 class="text-4xl font-bold text-gray-900 text-center mb-16">Featured Projects</h2>
+        <p class="text-gray-300 mb-9 text-center">somes repos are set to private for privacy reasons hence source code might be unavailable</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            
             <!-- Portfolio Website -->
             <div class="group relative bg-gray-50 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-500">
                 <div class="aspect-video bg-gray-200 relative overflow-hidden">
                     <img 
-                        src="/personal.png" 
+                        src="/jogajo.png" 
                         alt="Portfolio Preview" 
                         class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-300"
                         loading="lazy"
@@ -368,8 +371,8 @@
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50"></div>
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-semibold mb-4">Personal Portfolio</h3>
-                    <p class="text-gray-600 mb-6">A modern, responsive portfolio website showcasing my work and skills.</p>
+                    <h3 class="text-2xl font-semibold mb-4">Jogajo Games</h3>
+                    <p class="text-gray-600 mb-6">A modern, responsive Game studio Startup for a client.</p>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">SvelteKit</span>
                         <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">Tailwind CSS</span>
@@ -389,7 +392,7 @@
             <div class="group relative bg-gray-50 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-500">
                 <div class="aspect-video bg-gray-200 relative overflow-hidden">
                     <img 
-                        src="/weather1.webp" 
+                        src="/ranime.png" 
                         alt="Weather App Preview" 
                         class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-300"
                         loading="lazy"
@@ -397,17 +400,18 @@
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50"></div>
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-semibold mb-4">Weather Dashboard</h3>
-                    <p class="text-gray-600 mb-6">A weather application providing real-time weather data and forecasts.</p>
+                    <h3 class="text-2xl font-semibold mb-4">Ranime</h3>
+                    <p class="text-gray-600 mb-6">A Fun Anime streaming  Website i made for fun,fully capable of streaming any anime.</p>
                     <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">React</span>
+                        <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">JavaScript</span>
                         <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">API Integration</span>
-                        <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">CSS3</span>
+                        <span class="px-3 py-1 bg-gray-200 rounded-full text-sm">Tailwind CSS</span>
                     </div>
-                    <a href="https://github.com/Cptbanana3000/A-basic-Weather-App" class="inline-flex items-center text-blue-500 hover:text-blue-600 transition-all duration-300">
+                    <a href="https://github.com/Cptbanana3000/Ranime" class="inline-flex items-center text-blue-500 hover:text-blue-600 transition-all duration-300">
                         <i class="fab fa-github mr-2"></i>
                         View Source
                     </a>
+                    
                 </div>
             </div>
 
@@ -427,8 +431,8 @@
                             <p class="text-sm text-gray-400">A modern e-commerce solution with real-time inventory management.</p>
                         </div>
                         <div class="bg-white/5 p-4 rounded-lg backdrop-blur-sm">
-                            <h4 class="font-semibold mb-2">Task Management App</h4>
-                            <p class="text-sm text-gray-400">A collaborative task management tool with real-time updates.</p>
+                            <h4 class="font-semibold mb-2">Automated Resume Builder</h4>
+                            <p class="text-sm text-gray-400">A tool that generates resumes from a user's input.</p>
                         </div>
                     </div>
                     <p class="text-sm text-gray-400 mt-8">
